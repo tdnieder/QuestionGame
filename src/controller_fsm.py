@@ -16,7 +16,7 @@ class ControllerFSM:
         self.button_a.config(command=self.button_a_callback)
         self.button_b.config(command=self.button_b_callback)
         self.button_c.config(command=self.button_c_callback)
-        self.printer = Printer(delay_character)
+        self.printer = Printer(character_delay_ms)
         self.text_line = csv_read(file_path)
         # Game controlling attributes
         self.game_progress_line = 0

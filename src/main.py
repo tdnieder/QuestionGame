@@ -1,5 +1,6 @@
 import tkinter as tk
 from controller_fsm import *
+from settings import *
 
 
 # ------------------------------------------------
@@ -24,20 +25,33 @@ def init_gui():
     global button_a
     global button_b
     global button_c
-    screenwidth = root.winfo_screenwidth()
-    screenheight = root.winfo_screenheight()
+
+    # Determine frame size
+    if screenwidth_px <= 0:
+        screenwidth = root.winfo_screenwidth()
+    else:
+        screenwidth = screenwidth_px
+
+    if screenheight_px <= 0:
+        screenheight = root.winfo_screenheight()
+    else:
+        screenheight = screenheight_px
+
     # Frame
     root.title("Question Game")
     root.overrideredirect(True)
     root.geometry("{0}x{1}+0+0".format(screenwidth, screenheight))
-    root.config(bg="black", cursor="none")
+    if hasCursor:
+        root.config(bg="black")
+    else:
+        root.config(bg="black", cursor="none")
     root.focus_set()
     root.bind("<Escape>", lambda e: root.destroy())
     # Label
     text_label.config(anchor="nw", justify="left", fg="green", bg="black", font=("consolas", 13), padx=15, pady=10,
                       wraplength=(screenwidth - 30))
     text_label.pack()
-    text_label.place(width=(screenwidth - 20), height=(screenheight - 100))
+    text_label.place(width=(screenwidth - 20), height=(screenheight - 60))
     # Buttons
     button_frame.config(bg="black")
     button_frame.pack(side="bottom")
